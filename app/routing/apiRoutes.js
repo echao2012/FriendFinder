@@ -32,6 +32,10 @@ router.post("/api/friends", function(req, res) {
         }
     });
 
+    // Save the new friend data
+    friends.push(newFriend);
+
+    // Return the closest match
     res.json(friends[iMin]);
 });
 

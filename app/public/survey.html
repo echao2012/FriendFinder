@@ -15,8 +15,11 @@
 <body>
     <div class="container">
         <form>
+            <!-- Title -->
             <h1>Survey Questions</h1>
             <hr>
+
+            <!-- User name and photo inputs -->
             <h3>About You</h3>
             <div class="form-group">
                 <label for="nameInput">Name (Required)</label>
@@ -28,6 +31,7 @@
             </div>
             <hr>
 
+            <!-- Survey questions -->
             <div class="form-group">
                 <h3>Question 1</h3>
                 <label for="q1">Your mind is always buzzing with unexplored ideas and plans.</label>
@@ -108,8 +112,32 @@
                 </div>
             </div>
 
+            <!-- Submit button -->
             <button type="submit" class="btn btn-primary" id="submit">Submit</button>
         </form>
+    </div>
+
+    <!-- Results Modal -->
+    <div class="modal fade" id="results-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title">Best Match</h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <h3 id="results-name"></h3>
+                    <img class="img-fluid" id="results-img" alt="Profile Picture">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script type="text/javascript">
@@ -131,7 +159,6 @@
                 }));
             });
         });
-        
 
         $("#submit").on("click", function(event) {
             event.preventDefault();
@@ -150,7 +177,7 @@
             }
 
             // Create an object from the input data
-            const data = {
+            const userData = {
                 name: $("#nameInput").val(),
                 photo: $("#photoInput").val(),
                 scores: [
@@ -167,9 +194,14 @@
                 ]
             }
 
-            // POST the data
-            $.post("/api/friends", function(data) {
+            // POST the data to friends API
+            $.post("/api/friends", userData, function(data) {
+                // Get the returned match
+                $("#results-name").text(data.name);
+                $("#results-img").attr("src", data.photo);
 
+                // Show the results modal
+                $("#results-modal").modal("toggle");
             });
         });
     </script>
