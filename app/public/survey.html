@@ -13,6 +13,165 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    
+    <div class="container">
+        <form>
+            <h1>Survey Questions</h1>
+            <hr>
+            <h3>About You</h3>
+            <div class="form-group">
+                <label for="nameInput">Name (Required)</label>
+                <input type="text" class="form-control" id="nameInput" placeholder="Enter name">
+            </div>
+            <div class="form-group">
+                <label for="photoInput">Link to Photo Image (Required)</label>
+                <input type="url" class="form-control" id="photoInput" placeholder="Enter URL">
+            </div>
+            <hr>
+
+            <div class="form-group">
+                <h3>Question 1</h3>
+                <label for="q1">Your mind is always buzzing with unexplored ideas and plans.</label>
+                <div class="col-lg-3 px-0">
+                    <select class="form-control" id="q1"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>Question 2</h3>
+                <label for="q2">Generally speaking, you rely more on your experience than your imagination.</label>
+                <div class="col-lg-3 px-0">
+                    <select class="form-control" id="q2"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>Question 3</h3>
+                <label for="q3">You find it easy to stay relaxed and focused even when there is some pressure.</label>
+                <div class="col-lg-3 px-0">
+                    <select class="form-control" id="q3"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>Question 4</h3>
+                <label for="q4">You rarely do something just out of sheer curiosity.</label>
+                <div class="col-lg-3 px-0">
+                    <select class="form-control" id="q4"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>Question 5</h3>
+                <label for="q5">People can rarely upset you.</label>
+                <div class="col-lg-3 px-0">
+                    <select class="form-control" id="q5"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>Question 6</h3>
+                <label for="q6">It is often difficult for you to relate to other people’s feelings.</label>
+                <div class="col-lg-3 px-0">
+                    <select class="form-control" id="q6"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>Question 7</h3>
+                <label for="q7">In a discussion, truth should be more important than people’s sensitivities.</label>
+                <div class="col-lg-3 px-0">
+                    <select class="form-control" id="q7"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>Question 8</h3>
+                <label for="q8">You rarely get carried away by fantasies and ideas.</label>
+                <div class="col-lg-3 px-0">
+                    <select class="form-control" id="q8"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>Question 9</h3>
+                <label for="q9">You think that everyone’s views should be respected regardless of whether they are supported by facts or not.</label>
+                <div class="col-lg-3 px-0">
+                    <select class="form-control" id="q9"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>Question 10</h3>
+                <label for="q10">You feel more energetic after spending time with a group of people.</label>
+                <div class="col-lg-3 px-0">
+                    <select class="form-control" id="q10"></select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Populate the selects with the options
+            const items = {
+                option0: { value: "", text: "Select an option" },
+                option1: { value: "1", text: "1 - Strongly Disagree" },
+                option2: { value: "2", text: "2 - Disagree" },
+                option3: { value: "3", text: "3 - Neutral" },
+                option4: { value: "4", text: "4 - Agree" },
+                option5: { value: "5", text: "5 - Strongly Agree" },
+            }
+
+            $.each(items, function(i, item) {
+                $("select").append($("<option>", {
+                    value: item.value,
+                    text: item.text
+                }));
+            });
+        });
+        
+
+        $("#submit").on("click", function(event) {
+            event.preventDefault();
+
+            // Check that all questions were answered
+            let complete = true;
+            $(".form-control").each(function() {
+                if ($(this).val() === "") {
+                    complete = false;
+                }
+            });
+
+            if(!complete) {
+                alert("Please fill out all fields before submitting");
+                return;
+            }
+
+            // Create an object from the input data
+            const data = {
+                name: $("#nameInput").val(),
+                photo: $("#photoInput").val(),
+                scores: [
+                    $("#q1").val(),
+                    $("#q2").val(),
+                    $("#q3").val(),
+                    $("#q4").val(),
+                    $("#q5").val(),
+                    $("#q6").val(),
+                    $("#q7").val(),
+                    $("#q8").val(),
+                    $("#q9").val(),
+                    $("#q10").val()
+                ]
+            }
+
+            // POST the data
+            $.post("/api/friends", function(data) {
+
+            });
+        });
+    </script>
 </body>
 </html>
