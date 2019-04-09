@@ -11,6 +11,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Glyphicons -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div class="container">
@@ -22,11 +25,11 @@
             <!-- User name and photo inputs -->
             <h3>About You</h3>
             <div class="form-group">
-                <label for="nameInput">Name (Required)</label>
+                <label for="nameInput"><i class="fa fa-user"></i> Name (Required)</label>
                 <input type="text" class="form-control" id="nameInput" placeholder="Enter name">
             </div>
             <div class="form-group">
-                <label for="photoInput">Link to Photo Image (Required)</label>
+                <label for="photoInput"><i class="fa fa-camera"></i> Link to Photo Image (Required)</label>
                 <input type="url" class="form-control" id="photoInput" placeholder="Enter URL">
             </div>
             <hr>
@@ -113,8 +116,17 @@
             </div>
 
             <!-- Submit button -->
-            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+            <button type="submit" class="btn btn-primary" id="submit"><i class="fa fa-check" aria-hidden="true"></i> Submit</button>
         </form>
+
+        <hr class="my-4">
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p class="text-center"><a href="/api/friends">API Friends List</a> | <a href="https://github.com/echao2012/FriendFinder">GitHub Repo</a></p>
+            </div>
+        </footer>
     </div>
 
     <!-- Results Modal -->
