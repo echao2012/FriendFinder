@@ -152,6 +152,24 @@
         </div>
     </div>
 
+    <!-- Survey Incomplete Modal -->
+    <div class="modal fade" id="incomplete-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Please fill out all fields before submitting.</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
         $(document).ready(function() {
             // Populate the selects with the options
@@ -184,7 +202,8 @@
             });
 
             if(!complete) {
-                alert("Please fill out all fields before submitting");
+                // Show the survey incomplete modal
+                $("#incomplete-modal").modal("toggle");
                 return;
             }
 
@@ -215,6 +234,10 @@
                 // Show the results modal
                 $("#results-modal").modal("toggle");
             });
+        });
+
+        $("#results-modal").on("hidden.bs.modal", function() {
+            window.location = "/home"
         });
     </script>
 </body>
